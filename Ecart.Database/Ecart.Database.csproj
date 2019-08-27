@@ -50,9 +50,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="EcartContext.cs" />
-    <Compile Include="Migrations\201908251050172_InitialModel.cs" />
-    <Compile Include="Migrations\201908251050172_InitialModel.Designer.cs">
-      <DependentUpon>201908251050172_InitialModel.cs</DependentUpon>
+    <Compile Include="Migrations\201908260449052_InitialModel.cs" />
+    <Compile Include="Migrations\201908260449052_InitialModel.Designer.cs">
+      <DependentUpon>201908260449052_InitialModel.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -68,8 +68,8 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201908251050172_InitialModel.resx">
-      <DependentUpon>201908251050172_InitialModel.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201908260449052_InitialModel.resx">
+      <DependentUpon>201908260449052_InitialModel.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

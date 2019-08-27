@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ecart.Entities", "Ecart.Ent
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ecart.Database", "Ecart.Database\Ecart.Database.csproj", "{B9D820C7-9736-4DBC-AF15-45DB9EE234D1}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ecart.Services", "Ecart.Services\Ecart.Services.csproj", "{6BA748D6-70F2-439C-9492-32EEA9FE7B37}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{B9D820C7-9736-4DBC-AF15-45DB9EE234D1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B9D820C7-9736-4DBC-AF15-45DB9EE234D1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B9D820C7-9736-4DBC-AF15-45DB9EE234D1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6BA748D6-70F2-439C-9492-32EEA9FE7B37}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6BA748D6-70F2-439C-9492-32EEA9FE7B37}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6BA748D6-70F2-439C-9492-32EEA9FE7B37}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6BA748D6-70F2-439C-9492-32EEA9FE7B37}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

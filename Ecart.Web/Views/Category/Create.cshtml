@@ -5,12 +5,61 @@
 
 <h2>Create</h2>
 
-<form>
+<form method="post">
     <label>Name</label>
-    <input />
+    <input name="Name" />
     <br />
     <label>Description</label>
-    <input />
+    <input name="Description" />
+    <br />
+    <label>Image</label>
+    <input type="hidden" id="ImageUrl" name="ImageUrl" />
+    <input id ="imageUpload" name="image" type="file" accept=".png, .jpg"/>
+    
+    <div class="thumb">
+        <img id="categoryImage" />
+    </div>
+    
     <br />
     <button type="submit">Save</button>
 </form>
+
+<script>
+    $("#imageUpload").change(function () {
+
+        var element = this;
+
+        var formData = new FormData();
+
+        var totalFiles = element.files.length;
+
+        for(var i = 0; i < totalFiles; i++)
+        {
+            var file = element.files[i];
+            formData.append("Photo", file);
+        }
+
+        $.ajax({
+                type: 'POST',
+                url: '@Url.Action("UploadImage", "Shared")',
+                dataType: 'json',
+                data: formData,
+                contentType: false,
+                processData: false
+            })
+            .done(function (response) {
+                console.log(response);
+
+                if (response.Success) {
+                    $("#ImageUrl").val(response.ImageUrl);
+                    $("#categoryImage").attr("src", response.ImageUrl);
+                }
+            })
+            .fail(function (XMLHttpRequest, textStatus, errorThrown) {
+                alert("FAIL");
+            });
+    });
+
+   
+
+</script>

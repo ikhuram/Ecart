@@ -1,4 +1,5 @@
 ﻿using Ecart.Entities;
+using Ecart.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +10,16 @@ namespace Ecart.Web.Controllers
 {
     public class CategoryController : Controller
     {
-        // GET: Category
+        private CategoriesService categoryService = new CategoriesService();
+
+        [HttpGet]
+        public ActionResult Index()
+        {
+            var categories = categoryService.GetCategories();
+            return View(categories);
+        }
+
+        #region Create Category
         [HttpGet]
         public ActionResult Create()
         {
@@ -19,7 +29,44 @@ namespace Ecart.Web.Controllers
         [HttpPost]
         public ActionResult Create(Category category)
         {
+            categoryService.Create(category);
+
             return View();
         }
+        #endregion
+
+        #region Edit Category
+        [HttpGet]
+        public ActionResult Edit(int id)
+        {
+            var category = categoryService.GetCategory(id);
+            return View(category);
+        }
+
+        [HttpPost]
+        public ActionResult Edit(Category category)
+        {
+            categoryService.Edit(category);
+
+            return RedirectToAction("Index");
+        }
+        #endregion
+
+        #region Delete Category
+        [HttpGet]
+        public ActionResult Delete(int id)
+        {
+            var category = categoryService.GetCategory(id);
+            return View(category);
+        }
+
+        [HttpPost]
+        public ActionResult Delete(Category category)
+        {
+            categoryService.Delete(category.Id);
+
+            return RedirectToAction("Index");
+        }
+        #endregion
     }
 }
