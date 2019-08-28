@@ -7,20 +7,24 @@
     <h2 align="center">Categories</h2>
     <table class="table table-striped">
         <thead>
-            <tr>
-                <td>Name</td>
-                <td>Description</td>
-            </tr>
+        <tr>
+            <td>Name</td>
+            <td>Description</td>
+        </tr>
         </thead>
         <tbody>
-            @foreach (var category in Model)
-            {
-                <tr>
-                    <td>@category.Name</td>
-                    <td>@category.Description</td>
-                </tr>
-            }
+        @foreach (var category in Model)
+        {
+            <tr>
+                <td>@category.Name</td>
+                <td>@category.Description</td>
+                <td>
+                    <button class="classEdit"  onclick="location.href='@Url.Action("Edit", "Category", new { id = category.Id })'">Edit</button>
+                    <button class="classDelete" data-id="@category.Id" >Delete</button>
+                </td>
+            </tr>
+        }
         </tbody>
     </table>
-    
 </div>
+
