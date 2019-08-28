@@ -5,15 +5,24 @@
 
 <div>
     <form method="post">
-        <label>Search</label>
-        <input id="txtSearch" name="search" />
-        <button type="button" id="BtnSearch">Search</button>
+        <div class="form-group">
+            <label>Search</label>
+            <div class="row">
+                <div class="col-md-8">
+                    <input class="form-control" id="txtSearch" name="search"/>
+                </div>
+                <div class="col-md-4">
+                    <button type="button" id="BtnSearch">Search</button>
+                    <button type="button" id="BtnNew">New</button>
+                </div>
+            </div>
+        </div>
     </form>
-    <button type="button" id="BtnNew">New</button>
+   
 </div>
 
 <div>
-    <table>
+    <table class="table table-striped">
         <thead>
         <tr>
             <td>Name</td>
@@ -30,9 +39,18 @@
                 <td>@product.Name</td>
                 <td>@product.Description</td>
                 <td>@product.UnitPrice</td>
-                <td>@product.Category</td>
                 <td>
-                    <button class="classEdit" data-id="@product.Id">Edit</button> |
+                    @if (product.Category != null)
+                    {
+                    <text>@product.Category.Name</text>
+                    }
+                    else
+                    {
+                    <text>-</text>
+                    }
+                </td>
+                <td>
+                    <button class="classEdit" data-id="@product.Id">Edit</button>
                     <button class="classDelete" data-id="@product.Id" >Delete</button>
                 </td>
             </tr>

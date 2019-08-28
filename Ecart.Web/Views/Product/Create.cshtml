@@ -1,4 +1,4 @@
-﻿
+﻿@model IEnumerable<Category>
 @{
     ViewBag.Title = "Create";
 }
@@ -6,19 +6,31 @@
 <h2>Create</h2>
 
 <form id="createProduct">
-    <label>Name</label>
-    <input name="Name" />
-    <br />
-    <label>Description</label>
-    <input name="Description" />
-    <br />
-    <label>Unit Price</label>
-    <input name="UnitPrice" />
-    <br />
-    <label>Category</label>
-    <input name="Category" />
-    <br />
-    <button id="BtnSave" type="button">Save</button>
+    <div class="form-group">
+        <label>Category</label>
+        <select class="form-control" name="CategoryId">
+            @foreach (var category in Model)
+            {
+                <option value="@category.Id">@category.Name</option>
+            }
+        </select>
+    </div>
+    <div class="form-group">
+        <label>Name</label>
+        <input class="form-control" name="Name" />
+    </div>
+   
+    <div class="form-group">
+        <label>Description</label>
+        <input class="form-control" name="Description" />
+    </div>
+    
+    <div class="form-group">
+        <label>Unit Price</label>
+        <input class="form-control" name="UnitPrice" />
+    </div>
+
+    <button id="BtnSave" type="button" class="btn btn-danger">Submit</button>
 </form>
 
 <script>

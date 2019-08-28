@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using Ecart.Entities;
 using Ecart.Services;
+using Ecart.Web.ViewModels;
 
 namespace Ecart.Web.Controllers
 {
@@ -35,13 +36,27 @@ namespace Ecart.Web.Controllers
         [HttpGet]
         public ActionResult Create()
         {
-            return PartialView();
+            CategoriesService categoryService = new CategoriesService();
+            var categories = categoryService.GetCategories();
+            return PartialView(categories);
         }
 
         [HttpPost]
-        public ActionResult Create(Product product)
+        public ActionResult Create(NewProductViewModel product)
         {
-            productService.Create(product);
+            CategoriesService categoryService = new CategoriesService();
+
+            var newProduct = new Product();
+
+            newProduct.Name = product.Name;
+            newProduct.Description = product.Description;
+            newProduct.UnitPrice = product.UnitPrice;
+            newProduct.ImageUrl = product.ImageUrl;
+            newProduct.IsFeatured = product.IsFeatured;
+
+            newProduct.Category = categoryService.GetCategory(product.CategoryId);
+
+            productService.Create(newProduct);
 
             return RedirectToAction("ProductTable");
         }

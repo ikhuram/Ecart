@@ -3,43 +3,52 @@
     ViewBag.Title = "Create";
 }
 
-<h2>Create</h2>
+<div class="container">
+    <h2 align="center">Create New Category</h2>
+    <form method="post">
+        <div class="form-group">
+            <label>Name</label>
+            <input class="form-control" name="Name" />
+        </div>
+        <div class="form-group">
+            <label>Description</label>
+            <input class="form-control" name="Description" />
+        </div>
 
-<form method="post">
-    <label>Name</label>
-    <input name="Name" />
-    <br />
-    <label>Description</label>
-    <input name="Description" />
-    <br />
-    <label>Image</label>
-    <input type="hidden" id="ImageUrl" name="ImageUrl" />
-    <input id ="imageUpload" name="image" type="file" accept=".png, .jpg"/>
-    
-    <div class="thumb">
-        <img id="categoryImage" />
-    </div>
-    
-    <br />
-    <button type="submit">Save</button>
-</form>
+        <div class="form-group">
+            <label>Image</label>
+            <input class="form-control" type="hidden" id="ImageUrl" name="ImageUrl" />
+            <input class="form-control" id="imageUpload" name="image" type="file" accept=".png, .jpg" />
 
-<script>
-    $("#imageUpload").change(function () {
+            <div class="thumb">
+                <img id="categoryImage" />
+            </div>
+        </div>
 
-        var element = this;
+        <div class="form-group">
+            <label>Is Featured</label>
+            <input name="IsFeatured" type="radio" value="True"/>True
+            <input name="IsFeatured" type="radio" value="False" checked="" />False
+        </div>
+        <button type="submit">Save</button>
+    </form>
+    <br/>
+</div>
+    <script>
+        $("#imageUpload").change(function () {
 
-        var formData = new FormData();
+            var element = this;
 
-        var totalFiles = element.files.length;
+            var formData = new FormData();
 
-        for(var i = 0; i < totalFiles; i++)
-        {
-            var file = element.files[i];
-            formData.append("Photo", file);
-        }
+            var totalFiles = element.files.length;
 
-        $.ajax({
+            for (var i = 0; i < totalFiles; i++) {
+                var file = element.files[i];
+                formData.append("Photo", file);
+            }
+
+            $.ajax({
                 type: 'POST',
                 url: '@Url.Action("UploadImage", "Shared")',
                 dataType: 'json',
@@ -47,19 +56,19 @@
                 contentType: false,
                 processData: false
             })
-            .done(function (response) {
-                console.log(response);
+                .done(function (response) {
+                    console.log(response);
 
-                if (response.Success) {
-                    $("#ImageUrl").val(response.ImageUrl);
-                    $("#categoryImage").attr("src", response.ImageUrl);
-                }
-            })
-            .fail(function (XMLHttpRequest, textStatus, errorThrown) {
-                alert("FAIL");
-            });
-    });
+                    if (response.Success) {
+                        $("#ImageUrl").val(response.ImageUrl);
+                        $("#categoryImage").attr("src", response.ImageUrl);
+                    }
+                })
+                .fail(function (XMLHttpRequest, textStatus, errorThrown) {
+                    alert("FAIL");
+                });
+        });
 
-   
 
-</script>
+
+    </script>

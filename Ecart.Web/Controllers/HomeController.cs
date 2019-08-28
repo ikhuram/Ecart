@@ -16,7 +16,7 @@ namespace Ecart.Web.Controllers
         {
             HomeViewModel model = new HomeViewModel();
 
-            model.FeaturedCategories = categoryService.GetCategories();
+            model.FeaturedCategories = categoryService.GetFeaturedCategories();
 
             return View(model);
         }
