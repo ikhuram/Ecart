@@ -54,6 +54,10 @@
     <Compile Include="Migrations\201908260449052_InitialModel.Designer.cs">
       <DependentUpon>201908260449052_InitialModel.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201908291123434_AddConfigTable.cs" />
+    <Compile Include="Migrations\201908291123434_AddConfigTable.Designer.cs">
+      <DependentUpon>201908291123434_AddConfigTable.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -70,6 +74,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201908260449052_InitialModel.resx">
       <DependentUpon>201908260449052_InitialModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201908291123434_AddConfigTable.resx">
+      <DependentUpon>201908291123434_AddConfigTable.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

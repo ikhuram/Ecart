@@ -65,7 +65,7 @@ namespace Ecart.Services
         {
             using (var _context = new EcartContext())
             {
-                return _context.Categories.Find(id);
+                return _context.Categories.Single(x => x.Id == id);
             }
         }
         #endregion
