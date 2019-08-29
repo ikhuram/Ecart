@@ -127,12 +127,28 @@
             })
             .then((willDelete) => {
                 if (willDelete) {
-                    swal("Poof! Your imaginary file has been deleted!",
+
+                    $.ajax({
+                            type: "POST",
+                            url: "/Product/Delete",
+                            data: {
+                                id: $(this).attr("data-id")
+                            }
+
+                        })
+                        .done(function (response) {
+                            $("#tableContainer").html(response);
+                        })
+                        .fail(function (XMLHttpRequest, textStatus, errorThrown) {
+
+                        });
+
+                    swal("Delete! Your product has been deleted!",
                         {
                             icon: "success",
                         });
                 } else {
-                    swal("Your imaginary file is safe!");
+                    swal("Product delete cancelled");
                 }
             });
     });
