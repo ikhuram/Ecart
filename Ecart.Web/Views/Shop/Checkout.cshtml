@@ -1,0 +1,26 @@
+﻿@model Ecart.Web.ViewModels.CheckoutViewModel
+
+
+@if (Model != null)
+{
+
+    if (Model.CartProducts != null && Model.CartProducts.Count > 0)
+    {
+        <div>
+            @foreach (var products in Model.CartProducts)
+            {
+                var productQty = Model.CartProductIds.Where(productID => productID == products.Id).Count();
+
+                <div>Name: @products.Name - Unit Price: @products.UnitPrice - Quantity: @productQty - Total Price: @(productQty * products.UnitPrice)</div>
+            }
+        </div>
+        <div>
+            Total Bill: @Model.CartProducts.Sum(x => x.UnitPrice * Model.CartProductIds.Where(productID => productID == x.Id).Count())
+        </div>
+        ;
+    }
+    else
+    {
+        <div>No products in cart</div>
+    }
+}

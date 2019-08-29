@@ -28,9 +28,20 @@ namespace Ecart.Services
         {
             using (var _context = new EcartContext())
             {
-                return _context.Products.Find(id);
+                return _context.Products.Where(p => p.Id == id).Include(c => c.Category).FirstOrDefault();
             }
             
+        }
+        #endregion
+
+        #region Get List of Product
+        public List<Product> GetProduct(List<int> ids)
+        {
+            using (var _context = new EcartContext())
+            {
+                return _context.Products.Where(p => ids.Contains(p.Id)).ToList();
+            }
+
         }
         #endregion
 
