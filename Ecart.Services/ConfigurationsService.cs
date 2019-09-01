@@ -12,6 +12,22 @@ namespace Ecart.Services
 {
     public class ConfigurationsService
     {
+        //public static ConfigurationsService Instance
+        //{
+        //    get
+        //    {
+        //        if(instance == null) instance = new ConfigurationsService();
+        //        return instance;
+        //    }
+        //}
+
+        //private static ConfigurationsService instance { get; set; }
+
+        //private ConfigurationsService()
+        //{
+            
+        //}
+
         #region Add Configuration
         public void Create(Config config)
         {

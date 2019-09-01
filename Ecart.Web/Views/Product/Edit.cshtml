@@ -1,44 +1,60 @@
-﻿@model Product
+﻿@model Ecart.Web.ViewModels.EditProductViewModel
 @{
-    ViewBag.Title = "Edit";
+    ViewBag.Title = "Update";
 }
 
-<h2>Edit</h2>
+<h2>Update</h2>
 
-<form id="editProduct">
-    <input type="hidden" name="Id" value="@Model.Id" />
-    <label>Name</label>
-    <input name="Name" value="@Model.Name"/>
-    <br/>
-    <label>Description</label>
-    <input name="Description" value="@Model.Description"/>
-    <br/>
-    <label>Unit Price</label>
-    <input name="UnitPrice" value="@Model.UnitPrice"/>
-    <br/>
-    <label>Category</label>
-    <input name="Category" value="@Model.Category"/>
-    <br/>
-    <button id="BtnSave" type="button">Save</button>
-</form>
+<div class="container">
+    <form id="editProduct">
+        <div class="row">
+            <div class="col-md-8">
+                <div class="form-group">
+                    <label>Category</label>
+                    <select class="form-control col-md-4" name="CategoryID">
+                        @foreach (var category in Model.AvailableCategories)
+                        {
+                            var selected = category.Id == Model.Category_Id ? "selected" : string.Empty;
+                            <option value="@category.Id" @selected>@category.Name</option>
+                        }
+                    </select>
+                </div>
+                <div class="form-group">
+                    <input type="hidden" name="Id" value="@Model.Id"/>
+                    <label>Name</label>
+                    <input class="form-control" name="Name" value="@Model.Name"/>
+                </div>
+                <div class="form-group">
+                    <label>Description</label>
+                    <input class="form-control" name="Description" value="@Model.Description"/>
+                </div>
+                <div class="form-group">
+                    <label>Unit Price</label>
+                    <input class="form-control" name="UnitPrice" value="@Model.UnitPrice"/>
+                </div>
 
-<script>
-    
-    $("#BtnSave").click(function () {
+            </div>
+        </div>
+        <button id="BtnSave" type="button">Save</button>
+    </form>
+</div>
+    <script>
 
-        $.ajax({
+        $("#BtnSave").click(function () {
+
+            $.ajax({
                 type: "POST",
-                url: "/Product/Edit",
+                url: "/Product/Update",
                 data: $("#editProduct").serialize()
 
             })
-            .done(function (response) {
-                $("#tableContainer").html(response);
-                $("#actionContainer").html("");
-            })
-            .fail(function (XMLHttpRequest, textStatus, errorThrown) {
+                .done(function (response) {
+                    $("#tableContainer").html(response);
+                    $("#actionContainer").html("");
+                })
+                .fail(function (XMLHttpRequest, textStatus, errorThrown) {
 
-            });
-    });
+                });
+        });
 
-</script>
+    </script>

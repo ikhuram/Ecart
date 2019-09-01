@@ -50,13 +50,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="EcartContext.cs" />
-    <Compile Include="Migrations\201908260449052_InitialModel.cs" />
-    <Compile Include="Migrations\201908260449052_InitialModel.Designer.cs">
-      <DependentUpon>201908260449052_InitialModel.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201908291123434_AddConfigTable.cs" />
-    <Compile Include="Migrations\201908291123434_AddConfigTable.Designer.cs">
-      <DependentUpon>201908291123434_AddConfigTable.cs</DependentUpon>
+    <Compile Include="Migrations\201909010957359_InitialMigration.cs" />
+    <Compile Include="Migrations\201909010957359_InitialMigration.Designer.cs">
+      <DependentUpon>201909010957359_InitialMigration.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -72,11 +68,8 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201908260449052_InitialModel.resx">
-      <DependentUpon>201908260449052_InitialModel.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201908291123434_AddConfigTable.resx">
-      <DependentUpon>201908291123434_AddConfigTable.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201909010957359_InitialMigration.resx">
+      <DependentUpon>201909010957359_InitialMigration.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

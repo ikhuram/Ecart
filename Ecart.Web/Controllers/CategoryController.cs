@@ -8,6 +8,7 @@ using System.Web.Mvc;
 
 namespace Ecart.Web.Controllers
 {
+    //[Authorize]   // Only authorized users can access this
     public class CategoryController : Controller
     {
         private CategoriesService categoryService = new CategoriesService();
@@ -35,7 +36,7 @@ namespace Ecart.Web.Controllers
         }
         #endregion
 
-        #region Edit Category
+        #region Update Category
         [HttpGet]
         public ActionResult Edit(int id)
         {

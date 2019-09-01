@@ -12,6 +12,22 @@ namespace Ecart.Services
     
     public class ProductsService
     {
+        //public static ProductsService Instance
+        //{
+        //    get
+        //    {
+        //        if(instance == null) instance = new ProductsService();
+        //        return instance;
+        //    }
+        //}
+
+        //private static ProductsService instance { get; set; }
+
+        //private ProductsService()
+        //{
+
+        //}
+
         #region Get Products List
         public List<Product> GetProducts()
         {
@@ -60,7 +76,7 @@ namespace Ecart.Services
         #endregion
 
         #region Update Product
-        public void Edit(Product product)
+        public void Update(Product product)
         {
             using (var _context = new EcartContext())
             {

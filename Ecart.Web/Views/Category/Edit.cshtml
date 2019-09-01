@@ -1,6 +1,6 @@
 ﻿@model Ecart.Entities.Category
 @{
-    ViewBag.Title = "Edit";
+    ViewBag.Title = "Update";
 
     var trueChecked = @Model.IsFeatured ? "checked" : string.Empty;
     var falseChecked = !@Model.IsFeatured ? "checked" : string.Empty;
@@ -14,7 +14,7 @@
     <form method="post">
         <div class="row">
             <div class="col-md-8 title-section">
-                <h2 class="title" align="center">Edit Category</h2>
+                <h2 class="title" align="center">Update Category</h2>
             </div>
         </div>
         <div class="row">

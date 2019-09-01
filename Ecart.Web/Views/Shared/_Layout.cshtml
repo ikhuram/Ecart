@@ -1,4 +1,7 @@
-﻿<!DOCTYPE html>
+﻿@{
+    ConfigurationsService configurationsService = new ConfigurationsService();
+}
+<!DOCTYPE html>
 <html>
 <head>
     <!-- Basic Page Needs -->
@@ -37,9 +40,9 @@
 </head>
 <body class="header_sticky header-style-1 has-menu-extra">
     <!-- Preloader -->
-<div id="loading-overlay">
+@*<div id="loading-overlay">
     <div class="loader"></div>
-</div>
+</div>*@
 
 <div class="boxed">
 <div id="site-header-wrap">
@@ -178,7 +181,7 @@
                         </div>
                     </form>
                     <ul class="flat-social">
-                        <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                        <li><a href="@configurationsService.GetConfig("facebookUrl").Value"><i class="fa fa-facebook"></i></a></li>
                         <li><a href="#"><i class="fa fa-twitter"></i></a></li>
                         <li><a href="#"><i class="fa fa-google"></i></a></li>
                         <li><a href="#"><i class="fa fa-behance"></i></a></li>

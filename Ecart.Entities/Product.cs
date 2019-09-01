@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,6 +11,11 @@ namespace Ecart.Entities
     public class Product : BaseEntity
     {
         public int Id { get; set; }
+
+        [Column("Category_Id")]
+        public int Category_Id { get; set; }
+
+        [ForeignKey("Category_Id")]
         public virtual Category Category { get; set; }
 
         [Required]

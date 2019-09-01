@@ -26,6 +26,7 @@ namespace Ecart.Web.Controllers
 
                 model.CartProductIds = cartProductsCookie.Value.Split('-').Select(x => int.Parse(x)).ToList();
                 model.CartProducts = productsService.GetProduct(model.CartProductIds);
+                //model.CartProducts = ProductsService.Instance.GetProduct(model.CartProductIds);
 
             }
 
