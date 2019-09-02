@@ -12,8 +12,6 @@ namespace Ecart.Web.Controllers
     public class ProductController : Controller
     {
         CategoriesService categoryService = new CategoriesService();
-        private ProductsService productService = new ProductsService();
-
 
         public ActionResult Index()
         {
@@ -21,24 +19,36 @@ namespace Ecart.Web.Controllers
         }
 
         [HttpGet]
-        public ActionResult ProductTable(string search)
+        public ActionResult ProductTable(string search, int? pageNo)
         {
-            var products = productService.GetProducts();
+            //var products = ProductsService.Instance.GetProducts();
 
-            if (!string.IsNullOrEmpty(search))
-            {
-                products = products.Where(p => p.Name != null && p.Name.ToLower().Contains(search.ToLower())).ToList();
-            }
-            
-            return PartialView(products);
+            //if (!string.IsNullOrEmpty(search))
+            //{
+            //    products = products.Where(p => p.Name != null && p.Name.ToLower().Contains(search.ToLower())).ToList();
+            //}
+
+            //return PartialView(products);
+    
+            var pageSize = ConfigurationsService.Instance.PageSize();
+
+            ProductSearchViewModel model = new ProductSearchViewModel();
+            model.SearchTerm = search;
+
+            pageNo = pageNo.HasValue ? pageNo.Value > 0 ? pageNo.Value : 1 : 1;
+
+            var totalRecords = ProductsService.Instance.GetProductsCount(search);
+            model.Products = ProductsService.Instance.GetProducts(search, pageNo.Value, pageSize);
+
+            model.Pager = new Pager(totalRecords, pageNo, pageSize);
+
+            return PartialView(model);
         }
 
         #region Create Product
         [HttpGet]
         public ActionResult Create()
         {
-            //var categories = categoryService.GetCategories();
-            //return PartialView(categories);
 
             NewProductViewModel model = new NewProductViewModel();
 
@@ -62,9 +72,8 @@ namespace Ecart.Web.Controllers
 
             newProduct.Category = categoryService.GetCategory(product.Category_Id);
 
-            productService.Create(newProduct);
-            //ProductsService.Instance.Create(newProduct);
-
+            ProductsService.Instance.Create(newProduct);
+   
             return RedirectToAction("ProductTable");
         }
         #endregion
@@ -73,13 +82,10 @@ namespace Ecart.Web.Controllers
         [HttpGet]
         public ActionResult Edit(int id)
         {
-            //var product = ProductsService.Instance.GetProduct(id);
-            //var product = productService.GetProduct(id);
-
 
             EditProductViewModel model = new EditProductViewModel();
 
-            var product = productService.GetProduct(id);
+            var product = ProductsService.Instance.GetProduct(id);
 
             model.Id = product.Id;
             model.Name = product.Name;
@@ -96,7 +102,7 @@ namespace Ecart.Web.Controllers
         [HttpPost]
         public ActionResult Edit(Product model)
         {
-            var existingProduct = productService.GetProduct(model.Id);
+            var existingProduct = ProductsService.Instance.GetProduct(model.Id);
             existingProduct.Name = model.Name;
             existingProduct.Description = model.Description;
             existingProduct.UnitPrice = model.UnitPrice;
@@ -110,11 +116,11 @@ namespace Ecart.Web.Controllers
                 existingProduct.ImageUrl = model.ImageUrl;
             }
 
-            productService.Update(existingProduct);
+            ProductsService.Instance.Update(existingProduct);
 
             return RedirectToAction("ProductTable");
 
-            //productService.Update(product);
+            //ProductsService.Instance.Update(product);
 
             //return RedirectToAction("Index");
         }
@@ -125,7 +131,7 @@ namespace Ecart.Web.Controllers
         public ActionResult Delete(int id)
         {
             //ProductsService.Instance.Delete(id);
-            productService.Delete(id);
+            ProductsService.Instance.Delete(id);
 
             return RedirectToAction("ProductTable");
         }

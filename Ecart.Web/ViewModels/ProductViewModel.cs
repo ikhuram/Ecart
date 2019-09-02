@@ -9,6 +9,14 @@ using Microsoft.Ajax.Utilities;
 
 namespace Ecart.Web.ViewModels
 {
+    public class ProductSearchViewModel
+    {
+        public List<Product> Products { get; set; }
+        public string SearchTerm { get; set; }
+
+        public Pager Pager { get; set; }
+    }
+
     public class NewProductViewModel
     {
         public string Name{ get; set; }
@@ -43,5 +51,10 @@ namespace Ecart.Web.ViewModels
         public int Category_Id { get; set; }
 
         public List<Category> AvailableCategories { get; set; }
+    }
+
+    public class ProductViewModel
+    {
+        public Product Product { get; set; }
     }
 }

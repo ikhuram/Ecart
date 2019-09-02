@@ -1,5 +1,5 @@
 ﻿@{
-    ConfigurationsService configurationsService = new ConfigurationsService();
+    //ConfigurationsService configurationsService = new ConfigurationsService();
 }
 <!DOCTYPE html>
 <html>
@@ -181,7 +181,7 @@
                         </div>
                     </form>
                     <ul class="flat-social">
-                        <li><a href="@configurationsService.GetConfig("facebookUrl").Value"><i class="fa fa-facebook"></i></a></li>
+                        <li><a href="@ConfigurationsService.Instance.GetConfig("FacebookURL").Value"><i class="fa fa-facebook"></i></a></li>
                         <li><a href="#"><i class="fa fa-twitter"></i></a></li>
                         <li><a href="#"><i class="fa fa-google"></i></a></li>
                         <li><a href="#"><i class="fa fa-behance"></i></a></li>

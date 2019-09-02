@@ -12,21 +12,23 @@ namespace Ecart.Services
     
     public class ProductsService
     {
-        //public static ProductsService Instance
-        //{
-        //    get
-        //    {
-        //        if(instance == null) instance = new ProductsService();
-        //        return instance;
-        //    }
-        //}
+        #region Singleton
+        public static ProductsService Instance
+        {
+            get
+            {
+                if (instance == null) instance = new ProductsService();
 
-        //private static ProductsService instance { get; set; }
+                return instance;
+            }
+        }
+        private static ProductsService instance { get; set; }
 
-        //private ProductsService()
-        //{
+        private ProductsService()
+        {
+        }
 
-        //}
+        #endregion
 
         #region Get Products List
         public List<Product> GetProducts()
@@ -61,6 +63,49 @@ namespace Ecart.Services
         }
         #endregion
 
+        public List<Product> GetProducts(int pageNo)
+        {
+            int pageSize = 5;// int.Parse(ConfigurationsService.Instance.GetConfig("ListingPageSize").Value);
+
+            using (var context = new EcartContext())
+            {
+                return context.Products.OrderBy(x => x.Id).Skip((pageNo - 1) * pageSize).Take(pageSize).Include(x => x.Category).ToList();
+            }
+        }
+
+        public List<Product> GetProducts(int pageNo, int pageSize)
+        {
+            using (var context = new EcartContext())
+            {
+                return context.Products.OrderByDescending(x => x.Id).Skip((pageNo - 1) * pageSize).Take(pageSize).Include(x => x.Category).ToList();
+            }
+        }
+
+        public List<Product> GetProducts(string search, int pageNo, int pageSize)
+        {
+            using (var context = new EcartContext())
+            {
+                if (!string.IsNullOrEmpty(search))
+                {
+                    return context.Products.Where(product => product.Name != null &&
+                                                             product.Name.ToLower().Contains(search.ToLower()))
+                        .OrderBy(x => x.Id)
+                        .Skip((pageNo - 1) * pageSize)
+                        .Take(pageSize)
+                        .Include(x => x.Category)
+                        .ToList();
+                }
+                else
+                {
+                    return context.Products
+                        .OrderBy(x => x.Id)
+                        .Skip((pageNo - 1) * pageSize)
+                        .Take(pageSize)
+                        .Include(x => x.Category)
+                        .ToList();
+                }
+            }
+        }
         #region Create Product
         public void Create(Product product)
         {
@@ -99,6 +144,26 @@ namespace Ecart.Services
             }
         }
         #endregion
+
+        #region GetProductsCount
+        public int GetProductsCount(string search)
+        {
+            using (var context = new EcartContext())
+            {
+                if (!string.IsNullOrEmpty(search))
+                {
+                    return context.Products.Where(product => product.Name != null &&
+                                                             product.Name.ToLower().Contains(search.ToLower()))
+                        .Count();
+                }
+                else
+                {
+                    return context.Products.Count();
+                }
+            }
+        }
+        #endregion
+
 
     }
 }

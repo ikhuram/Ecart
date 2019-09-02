@@ -11,8 +11,7 @@ namespace Ecart.Web.Controllers
 {
     public class ShopController : Controller
     {
-        ProductsService productsService = new ProductsService();
-
+ 
         public ActionResult Checkout()
         {
             var cartProductsCookie = Request.Cookies["cartProducts"];
@@ -25,7 +24,7 @@ namespace Ecart.Web.Controllers
                 //List<int> ids = productIds.Select(x => int.Parse(x)).ToList();
 
                 model.CartProductIds = cartProductsCookie.Value.Split('-').Select(x => int.Parse(x)).ToList();
-                model.CartProducts = productsService.GetProduct(model.CartProductIds);
+                model.CartProducts = ProductsService.Instance.GetProduct(model.CartProductIds);
                 //model.CartProducts = ProductsService.Instance.GetProduct(model.CartProductIds);
 
             }

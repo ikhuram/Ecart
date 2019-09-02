@@ -12,21 +12,36 @@ namespace Ecart.Services
 {
     public class ConfigurationsService
     {
-        //public static ConfigurationsService Instance
-        //{
-        //    get
-        //    {
-        //        if(instance == null) instance = new ConfigurationsService();
-        //        return instance;
-        //    }
-        //}
+        #region Singleton
+        public static ConfigurationsService Instance
+        {
+            get
+            {
+                if (instance == null) instance = new ConfigurationsService();
+                return instance;
+            }
+        }
 
-        //private static ConfigurationsService instance { get; set; }
+        private static ConfigurationsService instance { get; set; }
 
-        //private ConfigurationsService()
-        //{
-            
-        //}
+        private ConfigurationsService()
+        {
+
+        }
+        #endregion
+
+        #region MyRegion
+
+        public int PageSize()
+        {
+            using (var context = new EcartContext())
+            {
+                var pageSizeConfig = context.Configurations.Find("PageSize");
+
+                return pageSizeConfig != null ? int.Parse(pageSizeConfig.Value) : 5;
+            }
+        }
+        #endregion
 
         #region Add Configuration
         public void Create(Config config)
