@@ -30,6 +30,108 @@ namespace Ecart.Services
 
         #endregion
 
+
+        public List<Product> SearchProducts(string searchTerm, int? minimumPrice, int? maximumPrice, int? categoryID, int? sortBy, int pageNo, int pageSize)
+        {
+            using (var context = new EcartContext())
+            {
+                var products = context.Products.ToList();
+
+                if (categoryID.HasValue)
+                {
+                    products = products.Where(x => x.Category.Id == categoryID.Value).ToList();
+                }
+
+                if (!string.IsNullOrEmpty(searchTerm))
+                {
+                    products = products.Where(x => x.Name.ToLower().Contains(searchTerm.ToLower())).ToList();
+                }
+
+                if (minimumPrice.HasValue)
+                {
+                    products = products.Where(x => x.UnitPrice >= minimumPrice.Value).ToList();
+                }
+
+                if (maximumPrice.HasValue)
+                {
+                    products = products.Where(x => x.UnitPrice <= maximumPrice.Value).ToList();
+                }
+
+                if (sortBy.HasValue)
+                {
+                    switch (sortBy.Value)
+                    {
+                        case 2:
+                            products = products.OrderByDescending(x => x.Id).ToList();
+                            break;
+                        case 3:
+                            products = products.OrderBy(x => x.UnitPrice).ToList();
+                            break;
+                        default:
+                            products = products.OrderByDescending(x => x.UnitPrice).ToList();
+                            break;
+                    }
+                }
+
+                return products.Skip((pageNo - 1) * pageSize).Take(pageSize).ToList();
+            }
+        }
+
+        public int SearchProductsCount(string searchTerm, int? minimumPrice, int? maximumPrice, int? categoryID, int? sortBy)
+        {
+            using (var context = new EcartContext())
+            {
+                var products = context.Products.ToList();
+
+                if (categoryID.HasValue)
+                {
+                    products = products.Where(x => x.Category.Id == categoryID.Value).ToList();
+                }
+
+                if (!string.IsNullOrEmpty(searchTerm))
+                {
+                    products = products.Where(x => x.Name.ToLower().Contains(searchTerm.ToLower())).ToList();
+                }
+
+                if (minimumPrice.HasValue)
+                {
+                    products = products.Where(x => x.UnitPrice >= minimumPrice.Value).ToList();
+                }
+
+                if (maximumPrice.HasValue)
+                {
+                    products = products.Where(x => x.UnitPrice <= maximumPrice.Value).ToList();
+                }
+
+                if (sortBy.HasValue)
+                {
+                    switch (sortBy.Value)
+                    {
+                        case 2:
+                            products = products.OrderByDescending(x => x.Id).ToList();
+                            break;
+                        case 3:
+                            products = products.OrderBy(x => x.UnitPrice).ToList();
+                            break;
+                        default:
+                            products = products.OrderByDescending(x => x.UnitPrice).ToList();
+                            break;
+                    }
+                }
+
+                return products.Count;
+            }
+        }
+
+
+        public int GetMaximumPrice()
+        {
+            using (var context = new EcartContext())
+            {
+                return (int)(context.Products.Max(x => x.UnitPrice));
+            }
+        }
+
         #region Get Products List
         public List<Product> GetProducts()
         {
@@ -106,6 +208,23 @@ namespace Ecart.Services
                 }
             }
         }
+
+        public List<Product> GetProductsByCategory(int categoryID, int pageSize)
+        {
+            using (var context = new EcartContext())
+            {
+                return context.Products.Where(x => x.Category.Id == categoryID).OrderByDescending(x => x.Id).Take(pageSize).Include(x => x.Category).ToList();
+            }
+        }
+
+        public List<Product> GetLatestProducts(int numberOfProducts)
+        {
+            using (var context = new EcartContext())
+            {
+                return context.Products.OrderByDescending(x => x.Id).Take(numberOfProducts).Include(x => x.Category).ToList();
+            }
+        }
+
         #region Create Product
         public void Create(Product product)
         {

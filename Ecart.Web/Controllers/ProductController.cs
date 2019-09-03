@@ -136,5 +136,17 @@ namespace Ecart.Web.Controllers
             return RedirectToAction("ProductTable");
         }
         #endregion
+
+        [HttpGet]
+        public ActionResult Details(int id)
+        {
+
+            ProductViewModel model = new ProductViewModel();
+
+            model.Product = ProductsService.Instance.GetProduct(id);
+
+            
+            return View(model);
+        }
     }
 }
