@@ -819,7 +819,7 @@
       countDown();
       flatCounter();
       googleMap();
-      flatPrice();  
+      //flatPrice();  
       flatFilterBox(); 
       flatShopSearch();
       topSearch();

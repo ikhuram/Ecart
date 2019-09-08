@@ -220,6 +220,7 @@
     <Compile Include="ViewModels\WidgetViewModels.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\javascript\main.js" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -295,7 +296,6 @@
     <Folder Include="Content\fonts\" />
     <Folder Include="Content\icon\" />
     <Folder Include="Content\images\" />
-    <Folder Include="Content\javascript\" />
     <Folder Include="Content\rev-slider\" />
     <Folder Include="Content\stylesheets\" />
   </ItemGroup>
