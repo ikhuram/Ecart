@@ -43,6 +43,16 @@ namespace Ecart.Services
         }
         #endregion
 
+        public int ShopPageSize()
+        {
+            using (var context = new EcartContext())
+            {
+                var pageSizeConfig = context.Configurations.Find("ShopPageSize");
+
+                return pageSizeConfig != null ? int.Parse(pageSizeConfig.Value) : 8;
+            }
+        }
+
         #region Add Configuration
         public void Create(Config config)
         {

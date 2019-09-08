@@ -11,7 +11,6 @@ namespace Ecart.Web.Controllers
 {
     public class ProductController : Controller
     {
-        CategoriesService categoryService = new CategoriesService();
 
         public ActionResult Index()
         {
@@ -52,7 +51,7 @@ namespace Ecart.Web.Controllers
 
             NewProductViewModel model = new NewProductViewModel();
 
-            model.AvailableCategories = categoryService.GetCategories();
+            model.AvailableCategories = CategoriesService.Instance.GetCategories();
 
             return PartialView(model);
         }
@@ -70,7 +69,7 @@ namespace Ecart.Web.Controllers
             newProduct.ImageUrl = product.ImageUrl;
             newProduct.IsFeatured = product.IsFeatured;
 
-            newProduct.Category = categoryService.GetCategory(product.Category_Id);
+            newProduct.Category = CategoriesService.Instance.GetCategory(product.Category_Id);
 
             ProductsService.Instance.Create(newProduct);
    
@@ -94,7 +93,7 @@ namespace Ecart.Web.Controllers
             model.Category_Id = product.Category != null ? product.Category.Id : 0;
             model.ImageUrl = product.ImageUrl;
 
-            model.AvailableCategories = categoryService.GetCategories();
+            model.AvailableCategories = CategoriesService.Instance.GetCategories();
 
             return View(model);
         }

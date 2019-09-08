@@ -11,12 +11,11 @@ namespace Ecart.Web.Controllers
     //[Authorize]   // Only authorized users can access this
     public class CategoryController : Controller
     {
-        private CategoriesService categoryService = new CategoriesService();
 
         [HttpGet]
         public ActionResult Index()
         {
-            var categories = categoryService.GetCategories();
+            var categories = CategoriesService.Instance.GetCategories();
             return View(categories);
         }
 
@@ -30,7 +29,7 @@ namespace Ecart.Web.Controllers
         [HttpPost]
         public ActionResult Create(Category category)
         {
-            categoryService.Create(category);
+            CategoriesService.Instance.Create(category);
 
             return View();
         }
@@ -40,14 +39,14 @@ namespace Ecart.Web.Controllers
         [HttpGet]
         public ActionResult Edit(int id)
         {
-            var category = categoryService.GetCategory(id);
+            var category = CategoriesService.Instance.GetCategory(id);
             return View(category);
         }
 
         [HttpPost]
         public ActionResult Edit(Category category)
         {
-            categoryService.Edit(category);
+            CategoriesService.Instance.Edit(category);
 
             return RedirectToAction("Index");
         }
@@ -57,14 +56,14 @@ namespace Ecart.Web.Controllers
         [HttpGet]
         public ActionResult Delete(int id)
         {
-            var category = categoryService.GetCategory(id);
+            var category = CategoriesService.Instance.GetCategory(id);
             return View(category);
         }
 
         [HttpPost]
         public ActionResult Delete(Category category)
         {
-            categoryService.Delete(category.Id);
+            CategoriesService.Instance.Delete(category.Id);
 
             return RedirectToAction("Index");
         }

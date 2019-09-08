@@ -12,6 +12,24 @@ namespace Ecart.Services
 {
     public class CategoriesService
     {
+        #region Singleton
+        public static CategoriesService Instance
+        {
+            get
+            {
+                if (instance == null) instance = new CategoriesService();
+
+                return instance;
+            }
+        }
+        private static CategoriesService instance { get; set; }
+
+        private CategoriesService()
+        {
+        }
+
+        #endregion
+
         #region Create Product
         public void Create(Category category)
         {
