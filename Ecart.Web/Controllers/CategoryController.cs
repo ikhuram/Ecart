@@ -8,7 +8,7 @@ using System.Web.Mvc;
 
 namespace Ecart.Web.Controllers
 {
-    //[Authorize]   // Only authorized users can access this
+    //[Authorize(Roles = "Admin")]   // Only authorized users can access this
     public class CategoryController : Controller
     {
 

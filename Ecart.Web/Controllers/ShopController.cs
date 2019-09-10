@@ -34,7 +34,7 @@ namespace Ecart.Web.Controllers
             return View(model);
         }
 
-        public ActionResult FilterProducts(string searchTerm, int? minimumPrice, int? maximumPrice, int? categoryID, int? sortBy, int? pageNo)
+        public ActionResult FilterProducts(string searchTerm, int? minPrice, int? maxPrice, int? categoryId, int? sortBy, int? pageNo)
         {
             var pageSize = ConfigurationsService.Instance.ShopPageSize();
 
@@ -43,10 +43,10 @@ namespace Ecart.Web.Controllers
             model.SearchTerm = searchTerm;
             pageNo = pageNo.HasValue ? pageNo.Value > 0 ? pageNo.Value : 1 : 1;
             model.SortBy = sortBy;
-            model.CategoryId = categoryID;
+            model.CategoryId = categoryId;
 
-            int totalCount = ProductsService.Instance.SearchProductsCount(searchTerm, minimumPrice, maximumPrice, categoryID, sortBy);
-            model.Products = ProductsService.Instance.SearchProducts(searchTerm, minimumPrice, maximumPrice, categoryID, sortBy, pageNo.Value, pageSize);
+            int totalCount = ProductsService.Instance.SearchProductsCount(searchTerm, minPrice, maxPrice, categoryId, sortBy);
+            model.Products = ProductsService.Instance.SearchProducts(searchTerm, minPrice, maxPrice, categoryId, sortBy, pageNo.Value, pageSize);
 
             model.Pager = new Pager(totalCount, pageNo, pageSize);
 

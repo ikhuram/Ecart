@@ -31,7 +31,7 @@ namespace Ecart.Services
         #endregion
 
 
-        public List<Product> SearchProducts(string searchTerm, int? minimumPrice, int? maximumPrice, int? categoryID, int? sortBy, int pageNo, int pageSize)
+        public List<Product> SearchProducts(string searchTerm, int? minPrice, int? maxPrice, int? categoryID, int? sortBy, int pageNo, int pageSize)
         {
             using (var context = new EcartContext())
             {
@@ -47,14 +47,14 @@ namespace Ecart.Services
                     products = products.Where(x => x.Name.ToLower().Contains(searchTerm.ToLower())).ToList();
                 }
 
-                if (minimumPrice.HasValue)
+                if (minPrice.HasValue)
                 {
-                    products = products.Where(x => x.UnitPrice >= minimumPrice.Value).ToList();
+                    products = products.Where(x => x.UnitPrice >= minPrice.Value).ToList();
                 }
 
-                if (maximumPrice.HasValue)
+                if (maxPrice.HasValue)
                 {
-                    products = products.Where(x => x.UnitPrice <= maximumPrice.Value).ToList();
+                    products = products.Where(x => x.UnitPrice <= maxPrice.Value).ToList();
                 }
 
                 if (sortBy.HasValue)
@@ -77,7 +77,7 @@ namespace Ecart.Services
             }
         }
 
-        public int SearchProductsCount(string searchTerm, int? minimumPrice, int? maximumPrice, int? categoryID, int? sortBy)
+        public int SearchProductsCount(string searchTerm, int? minPrice, int? maxPrice, int? categoryID, int? sortBy)
         {
             using (var context = new EcartContext())
             {
@@ -93,14 +93,14 @@ namespace Ecart.Services
                     products = products.Where(x => x.Name.ToLower().Contains(searchTerm.ToLower())).ToList();
                 }
 
-                if (minimumPrice.HasValue)
+                if (minPrice.HasValue)
                 {
-                    products = products.Where(x => x.UnitPrice >= minimumPrice.Value).ToList();
+                    products = products.Where(x => x.UnitPrice >= minPrice.Value).ToList();
                 }
 
-                if (maximumPrice.HasValue)
+                if (maxPrice.HasValue)
                 {
-                    products = products.Where(x => x.UnitPrice <= maximumPrice.Value).ToList();
+                    products = products.Where(x => x.UnitPrice <= maxPrice.Value).ToList();
                 }
 
                 if (sortBy.HasValue)
