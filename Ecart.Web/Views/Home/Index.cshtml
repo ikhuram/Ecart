@@ -1,11 +1,6 @@
 ﻿@model Ecart.Web.ViewModels.HomeViewModel
 @{
     ViewBag.Title = "Home Page";
-
-    var firstCategory = Model.FeaturedCategories.ElementAt(0);
-    var secondCategory = Model.FeaturedCategories.ElementAt(2);
-    var thirdCategory = Model.FeaturedCategories.ElementAt(3);
-    var fourthCategory = Model.FeaturedCategories.ElementAt(1);
 }
 
 <!-- SLIDER -->
@@ -186,71 +181,80 @@
     </div>
 </div>
 <!-- END SLIDER -->
-<!-- IMAGE BOX -->
-<section class="flat-row row-image-box">
-    <div class="container">
-        <div class="row gutter-10">
-            <div class="col-sm-6 col-md-4">
-                <div class="flat-image-box style-1 data-effect div-h22 clearfix">
-                    <div class="item data-effect-item">
-                        <div class="inner">
-                            <div class="thumb">
-                                <img src="@firstCategory.ImageUrl" alt="Image">
-                                <div class="elm-btn">
-                                    <a href="#" class="themesflat-button bg-white width-150">@firstCategory.Name</a>
-                                </div>
-                                <div class="overlay-effect bg-color-1"></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div><!-- /.col-md-4 -->
-            <div class="col-sm-6 col-md-4">
-                <div class="flat-image-box style-1 row2 data-effect clearfix">
-                    <div class="item data-effect-item">
-                        <div class="inner">
-                            <div class="thumb">
-                                <img src="@secondCategory.ImageUrl" alt="Image">
-                                <div class="elm-btn">
-                                    <a href="#" class="themesflat-button bg-white width-150">@secondCategory.Name</a>
-                                </div>
-                                <div class="overlay-effect bg-color-1"></div>
-                            </div>
-                        </div>
-                    </div>
 
-                    <div class="item data-effect-item">
-                        <div class="inner">
-                            <div class="thumb">
-                                <img src="@thirdCategory.ImageUrl" alt="Image">
-                                <div class="elm-btn">
-                                    <a href="#" class="themesflat-button bg-white width-150">@thirdCategory.Name</a>
+@if (Model.FeaturedCategories != null && Model.FeaturedCategories.Count() >= 4)
+{
+    var firstCategory = Model.FeaturedCategories.ElementAt(0);
+    var secondCategory = Model.FeaturedCategories.ElementAt(2);
+    var thirdCategory = Model.FeaturedCategories.ElementAt(3);
+    var fourthCategory = Model.FeaturedCategories.ElementAt(1);
+
+    <!-- IMAGE BOX -->
+    <section class="flat-row row-image-box">
+        <div class="container">
+            <div class="row gutter-10">
+                <div class="col-sm-6 col-md-4">
+                    <div class="flat-image-box style-1 data-effect div-h22 clearfix">
+                        <div class="item data-effect-item">
+                            <div class="inner">
+                                <div class="thumb">
+                                    <img src="@firstCategory.ImageUrl" alt="Image">
+                                    <div class="elm-btn">
+                                        <a href="#" class="themesflat-button bg-white width-150">@firstCategory.Name</a>
+                                    </div>
+                                    <div class="overlay-effect bg-color-1"></div>
                                 </div>
-                                <div class="overlay-effect bg-color-1"></div>
                             </div>
                         </div>
                     </div>
-                </div>
-            </div><!-- /.col-md-4 -->
-            <div class="col-sm-6 col-md-4">
-                <div class="flat-image-box style-1 data-effect div-h20 clearfix">
-                    <div class="item data-effect-item">
-                        <div class="inner">
-                            <div class="thumb">
-                                <img src="@fourthCategory.ImageUrl" alt="Image">
-                                <div class="elm-btn">
-                                    <a href="#" class="themesflat-button bg-white width-150">@fourthCategory.Name</a>
+                </div><!-- /.col-md-4 -->
+                <div class="col-sm-6 col-md-4">
+                    <div class="flat-image-box style-1 row2 data-effect clearfix">
+                        <div class="item data-effect-item">
+                            <div class="inner">
+                                <div class="thumb">
+                                    <img src="@secondCategory.ImageUrl" alt="Image">
+                                    <div class="elm-btn">
+                                        <a href="#" class="themesflat-button bg-white width-150">@secondCategory.Name</a>
+                                    </div>
+                                    <div class="overlay-effect bg-color-1"></div>
                                 </div>
-                                <div class="overlay-effect bg-color-1"></div>
+                            </div>
+                        </div>
+
+                        <div class="item data-effect-item">
+                            <div class="inner">
+                                <div class="thumb">
+                                    <img src="@thirdCategory.ImageUrl" alt="Image">
+                                    <div class="elm-btn">
+                                        <a href="#" class="themesflat-button bg-white width-150">@thirdCategory.Name</a>
+                                    </div>
+                                    <div class="overlay-effect bg-color-1"></div>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            </div><!-- /.col-md-4 -->
-        </div><!-- /.row -->
-    </div><!-- /.container -->
-</section>
-<!-- END IMAGE BOX -->
+                </div><!-- /.col-md-4 -->
+                <div class="col-sm-6 col-md-4">
+                    <div class="flat-image-box style-1 data-effect div-h20 clearfix">
+                        <div class="item data-effect-item">
+                            <div class="inner">
+                                <div class="thumb">
+                                    <img src="@fourthCategory.ImageUrl" alt="Image">
+                                    <div class="elm-btn">
+                                        <a href="#" class="themesflat-button bg-white width-150">@fourthCategory.Name</a>
+                                    </div>
+                                    <div class="overlay-effect bg-color-1"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div><!-- /.col-md-4 -->
+            </div><!-- /.row -->
+        </div><!-- /.container -->
+    </section>
+    <!-- END IMAGE BOX -->
+}
 <!-- PRODUCT NEW -->
 <section class="flat-row row-product-new">
     <div class="container">
