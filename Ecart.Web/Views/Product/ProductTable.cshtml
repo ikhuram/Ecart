@@ -52,7 +52,7 @@
                     }
                 </td>
                 <td>
-                    <button class="BtnUpdate" data-id="@product.Id">Update</button>
+                    <button class="BtnEdit" data-id="@product.Id">Update</button>
                     <button class="BtnDelete" data-id="@product.Id" >Delete</button>
                     <button class="addtoCart" data-id="@product.Id">Add To Cart</button>
                 </td>
@@ -145,7 +145,7 @@
         //debugger;
         $.ajax({
             type: "GET",
-            url: "/Product/Update",
+            url: "/Product/Edit",
             data: {
                 id: $(this).attr("data-id")
             }
@@ -153,6 +153,7 @@
         })
         .done(function (response) {
             $("#actionContainer").html(response);
+            focusAction();
         })
         .fail(function (XMLHttpRequest, textStatus, errorThrown) {
 

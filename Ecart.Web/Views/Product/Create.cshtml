@@ -1,11 +1,12 @@
 ﻿@model Ecart.Web.ViewModels.NewProductViewModel
 @{
-    ViewBag.Title = "Create";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    var imageUrl = !string.IsNullOrEmpty(Model.ImageUrl) ? Model.ImageUrl : "/Content/images/system/placeholder-image.jpg";
 }
 
-<h2>Create</h2>
 <div class="container">
+    <div class="col-md-8 title-section">
+        <h2 class="title" align="center">Create New Product</h2>
+    </div>
     <form id="createProduct">
         <div class="row">
             <div class="col-md-8">
@@ -32,12 +33,60 @@
                     <label>Unit Price</label>
                     <input class="form-control" name="UnitPrice"/>
                 </div>
+
+                <div class="form-group">
+                    <label>Image</label>
+                    <input class="form-control" type="hidden" id="ImageUrl" name="ImageUrl"/>
+                    <input class="form-control" id="imageUpload" name="image" type="file" accept=".png, .jpg"/>
+                </div>
             </div>
+
+            <div class="col-md-4">
+                <div class="thumb">
+                    <img src="@imageUrl" class="img-thumbnail img-fluid" id="productImage"/>
+                </div>
+            </div>
+
         </div>
+
         <button id="BtnSave" type="button" class="btn btn-danger">Submit</button>
     </form>
 </div>
 <script>
+
+    $("#imageUpload").change(function () {
+
+        var element = this;
+
+        var formData = new FormData();
+
+        var totalFiles = element.files.length;
+
+        for (var i = 0; i < totalFiles; i++) {
+            var file = element.files[i];
+            formData.append("Photo", file);
+        }
+
+        $.ajax({
+                type: 'POST',
+                url: '@Url.Action("UploadImage", "Shared")',
+                dataType: 'json',
+                data: formData,
+                contentType: false,
+                processData: false
+            })
+            .done(function (response) {
+                //console.log(response);
+
+                if (response.Success) {
+                    $("#ImageUrl").val(response.ImageUrl);
+                    $("#productImage").attr("src", response.ImageUrl);
+                }
+            })
+            .fail(function (XMLHttpRequest, textStatus, errorThrown) {
+                alert("FAIL");
+            });
+    });
 
     $("#BtnSave").click(function () {
 

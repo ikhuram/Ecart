@@ -95,7 +95,7 @@ namespace Ecart.Web.Controllers
 
             model.AvailableCategories = CategoriesService.Instance.GetCategories();
 
-            return View(model);
+            return PartialView(model);
         }
 
         [HttpPost]
@@ -107,7 +107,7 @@ namespace Ecart.Web.Controllers
             existingProduct.UnitPrice = model.UnitPrice;
 
             existingProduct.Category = null; //mark it null. Because the referncy key is changed below
-            existingProduct.Category_Id = model.Category.Id;
+            existingProduct.Category_Id = model.Category_Id;
 
             //dont update imageURL if its empty
             if (!string.IsNullOrEmpty(model.ImageUrl))
@@ -118,10 +118,6 @@ namespace Ecart.Web.Controllers
             ProductsService.Instance.Update(existingProduct);
 
             return RedirectToAction("ProductTable");
-
-            //ProductsService.Instance.Update(product);
-
-            //return RedirectToAction("Index");
         }
         #endregion
 
