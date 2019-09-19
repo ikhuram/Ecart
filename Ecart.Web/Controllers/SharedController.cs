@@ -25,17 +25,6 @@ namespace Ecart.Web.Controllers
                 file.SaveAs(path);
 
                 result.Data = new { Success = true, ImageUrl = string.Format("/content/images/{0}", fileName) };
-
-                //var newImage = new Image() { Name = fileName };
-
-                //if (ImagesService.Instance.SaveNewImage(newImage))
-                //{
-                //    result.Data = new { Success = true, Image = fileName, File = newImage.ID, ImageURL = string.Format("{0}{1}", Variables.ImageFolderPath, fileName) };
-                //}
-                //else
-                //{
-                //    result.Data = new { success = false, Message = new HttpStatusCodeResult(500) };
-                //}
             }
             catch (Exception ex)
             {
